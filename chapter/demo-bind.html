@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--实现边输入边打印功能；用v-model，来双向绑定；-->
+<div id="app">
+    输入：<input type="text" v-model="message">{{message}}
+    <input type="radio" name="sex" value="男" v-model="message">男
+    <input type="radio" name="sex" value="女" v-model="message">女
+    <p>选中了:  {{message}}</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            message:""
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<!--view模板-->
+<div id="app">
+    <todo>
+        <todo_titles slot="todo_title" v-bind:title="title"></todo_titles>
+        <todo_items slot="todo_item" v-for="(todoo,index) in todos"
+                    v-bind:item="todoo" v-bind:index="index" v-on:remove="removeItems(index)" v-bind:key="index"></todo_items>
+    </todo>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    Vue.component("todo",{
+        template:
+            '<div>' +
+            '<slot name="todo_title"></slot>' +
+            '<ul>' +
+            '<slot name="todo_item"></slot>' +
+
+            '</ul>' +
+            '</div>'
+    });
+    Vue.component("todo_titles",{
+        props:['title'],
+        template: '<div>{{title}}</div>'
+    });
+    Vue.component("todo_items",{
+        props:['item','index'],
+        template:'<li>{{item}}<button @click="remove">删除</button></li>',
+        methods:{
+            remove:function (index){
+                // this.$emit('事件名',参数) 自定义事件；
+                this.$emit('remove',index)
+            }
+        }
+
+    });
+</script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            title:'为什么坚持，想一想当初',
+            todos:['我真棒','我真乖','我真腻害']
+        },
+        methods: {
+            removeItems:function (index){
+                /**
+                 * index表示下标，splice方法，表示删除或者增加元素；
+                 * splice(index,1)，表示从下标index,开始删除一个元素；
+                 * splice(index,2)，表示从下标index,开始删除两个元素
+                 */
+                this.todos.splice(index,1);//表示删除当前下标对应元素；
+            }
+        }
+
+    });
+</script>
+
+</body>
+</html>

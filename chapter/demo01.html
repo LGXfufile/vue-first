@@ -7,13 +7,16 @@
 <body>
 <!--view层，模板-->
 <div id="app">
-    {{message}}
+<!--    v-bind：功能，鼠标悬浮时，前端展示title绑定的message信息；-->
+    <span v-bind:title="message">
+        v-bind：功能，鼠标悬浮时，前端展示title绑定的message信息
+    </span>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
 <script>
     var vm = new Vue({
         el:"#app",
-        // model 数据
+        // model 数据与前端view双向绑定； MV模型，这里的message可以通过ajax从后端取数据；
         data:{
             message:"hello xin"
         }
